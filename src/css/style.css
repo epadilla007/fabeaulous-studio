@@ -1,6 +1,6 @@
 /* ==========================================================================
    Fabeaulous Feet · Plain CSS design system (no build step)
-   Tokens live in :root. Never use @import "tailwindcss" or @theme here.
+   Tokens live in :root. Passthrough file: no Tailwind build directives.
 
    WCAG AA contrast pairs (checked 2026-09-15)
    charcoal #111217 on porcelain #FBF8FA ........ 17.73
@@ -595,7 +595,7 @@ a.channel:hover { border-color: var(--ff-plum); box-shadow: var(--shadow-soft); 
 .js .clip-reveal { clip-path: inset(100% 0 0 0); }
 .js .spec, .js .product-card { opacity: 0; transform: translateY(30px); }
 .js .step-card > * { opacity: 0; transform: translateY(24px); }
-.js .manifesto-big .w { opacity: 0.14; }
+.js .manifesto-big .w { opacity: 0.45; } /* 4.11:1 on navy at start, large text */
 .js .draw circle { stroke-dasharray: 700; stroke-dashoffset: 700; }
 
 /* ---------- Mobile hero composition: image on top, copy below ---------- */
@@ -607,3 +607,4 @@ a.channel:hover { border-color: var(--ff-plum); box-shadow: var(--shadow-soft); 
   .hero-content { margin-top: -96px; padding-top: 0; padding-bottom: 64px; }
   .hero-disc { top: 24svh; right: -30vw; width: 90vw; }
 }
+.hero-media picture { display: block; width: 100%; height: 100%; }

@@ -2,7 +2,10 @@
 {%- set h = t.home -%}
 <section class="hero" data-hero>
   <div class="hero-media">
-    <img class="hero-img" src="/images/hero-pedicure-station.jpg" alt="{{ h.hero.imgAlt }}" width="1920" height="1280" fetchpriority="high">
+    <picture>
+      <source type="image/webp" srcset="/images/hero-pedicure-station-828.webp 828w, /images/hero-pedicure-station-1280.webp 1280w, /images/hero-pedicure-station-1920.webp 1920w" sizes="100vw">
+      <img class="hero-img" src="/images/hero-pedicure-station.jpg" srcset="/images/hero-pedicure-station-828.jpg 828w, /images/hero-pedicure-station-1280.jpg 1280w, /images/hero-pedicure-station.jpg 1920w" sizes="100vw" alt="{{ h.hero.imgAlt }}" width="1920" height="1280" fetchpriority="high">
+    </picture>
   </div>
   <div class="hero-shade" aria-hidden="true"></div>
   {{ m.disc("hero-disc") }}

@@ -10,8 +10,8 @@ export default {
   whatsapp: "WHATSAPP_NUMBER",
   // >>> PLACEHOLDER: replace with the Web3Forms access key from web3forms.com
   web3formsKey: "YOUR_WEB3FORMS_ACCESS_KEY",
-  cssVersion: 3,
-  jsVersion: 3,
+  cssVersion: 4,
+  jsVersion: 4,
   instagram: "https://www.instagram.com/fabeaulousfeet/",
   facebook: "https://www.facebook.com/fabeaulous.feet/",
   locality: "Nuevo Vallarta",

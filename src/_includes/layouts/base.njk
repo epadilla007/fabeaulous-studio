@@ -35,9 +35,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap" rel="stylesheet"></noscript>
 {%- if heroImage %}
-<link rel="preload" as="image" href="{{ heroImage }}" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="/images/hero-pedicure-station-828.webp 828w, /images/hero-pedicure-station-1280.webp 1280w, /images/hero-pedicure-station-1920.webp 1920w" imagesizes="100vw" fetchpriority="high">
 {%- endif %}
 <style>body{font-family:'Jost',system-ui,sans-serif;background:#FBF8FA;color:#111217}</style>
 <link rel="stylesheet" href="/css/style.css?v={{ site.cssVersion }}">
