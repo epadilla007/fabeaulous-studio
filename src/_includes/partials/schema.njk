@@ -1,0 +1,12 @@
+{%- set url = pages[pageKey][lang] | absUrl(site.url) if pages[pageKey] else site.url -%}
+{%- if pageKey == 'professionals' -%}
+,{"@type":"FAQPage","@id":"{{ url }}#faq","url":"{{ url }}","inLanguage":"{{ lang }}","mainEntity":[{% for f in t.professionals.faq.items %}{"@type":"Question","name":{{ f.q | json | safe }},"acceptedAnswer":{"@type":"Answer","text":{{ f.a | json | safe }}}}{% if not loop.last %},{% endif %}{% endfor %}]}
+{%- elif pageKey == 'contact' -%}
+,{"@type":"ContactPage","url":"{{ url }}","name":{{ t.contact.title | json | safe }},"inLanguage":"{{ lang }}","about":{"@id":"{{ site.url }}/#organization"}}
+{%- elif pageKey == 'about' -%}
+,{"@type":"AboutPage","url":"{{ url }}","name":{{ t.about.title | json | safe }},"inLanguage":"{{ lang }}","about":{"@id":"{{ site.url }}/#organization"}}
+{%- elif pageKey == 'products' -%}
+,{"@type":"CollectionPage","url":"{{ url }}","name":{{ t.products.title | json | safe }},"inLanguage":"{{ lang }}","mainEntity":{"@type":"ItemList","itemListElement":[
+{%- set plist = [t.products.file.name, t.products.discs.items[0].name, t.products.discs.items[1].name, t.products.discs.items[2].name, t.products.tips.items[0].name, t.products.tips.items[1].name, t.products.lamp.name, t.products.detail.items[0].name, t.products.detail.items[1].name, t.products.detail.items[2].name] -%}
+{% for n in plist %}{"@type":"ListItem","position":{{ loop.index }},"item":{"@type":"Product","name":{{ n | json | safe }},"brand":{"@type":"Brand","name":"Fabeaulous Feet"}}}{% if not loop.last %},{% endif %}{% endfor %}]}}
+{%- endif -%}

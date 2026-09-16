@@ -1,0 +1,162 @@
+{%- import "partials/macros.njk" as m -%}
+{%- set h = t.home -%}
+<section class="hero" data-hero>
+  <div class="hero-media">
+    <img class="hero-img" src="/images/hero-pedicure-station.jpg" alt="{{ h.hero.imgAlt }}" width="1920" height="1280" fetchpriority="high">
+  </div>
+  <div class="hero-shade" aria-hidden="true"></div>
+  {{ m.disc("hero-disc") }}
+  <div class="container hero-content">
+    <p class="section-label section-label-light hero-label">{{ h.hero.label }}</p>
+    <h1 class="hero-title" aria-label="{{ h.hero.line1 }} {{ h.hero.line2 }}">
+      <span class="hero-line" aria-hidden="true">{% for w in h.hero.line1.split(" ") %}<span class="w">{{ w }}</span>{% if not loop.last %} {% endif %}{% endfor %}</span>
+      <span class="hero-line hero-line-accent" aria-hidden="true">{% for w in h.hero.line2.split(" ") %}<span class="w">{{ w }}</span>{% if not loop.last %} {% endif %}{% endfor %}</span>
+    </h1>
+    <p class="hero-sub">{{ h.hero.sub }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary magnetic" href="{{ pages.contact[lang] }}#pricing"><span>{{ t.cta.pricing }}</span>{{ m.arrow() }}</a>
+      <a class="btn btn-ghost-light magnetic" href="#system"><span>{{ t.cta.system }}</span></a>
+    </div>
+    <p class="hero-note">{{ m.toes() }}{{ h.hero.note }}</p>
+  </div>
+</section>
+
+<section class="manifesto" data-manifesto aria-labelledby="manifesto-title">
+  <div class="manifesto-sticky">
+    <div class="container manifesto-grid">
+      <p class="section-label section-label-light">{{ h.manifesto.label }}</p>
+      <p class="manifesto-small">{{ h.manifesto.small }}</p>
+      <h2 class="manifesto-big" id="manifesto-title">{% for w in h.manifesto.big.split(" ") %}<span class="w">{{ w }}</span>{% if not loop.last %} {% endif %}{% endfor %}</h2>
+      <div class="manifesto-injuries">
+        <p class="injuries">{{ h.manifesto.injuries }}</p>
+        <p class="injuries-note">{{ h.manifesto.injuriesNote }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps section" id="how" aria-labelledby="steps-title">
+  <div class="container steps-grid">
+    <div class="steps-head">
+      <p class="section-label">{{ h.steps.label }}</p>
+      <h2 class="section-title" id="steps-title">{{ h.steps.title }}</h2>
+      <p class="lede">{{ h.steps.intro }}</p>
+      {{ m.disc("steps-disc draw") }}
+    </div>
+    <ol class="step-stack">
+      {% for s in h.steps.items %}
+      <li class="step-card" style="--i: {{ loop.index0 }}">
+        <span class="step-n">{{ s.n }}</span>
+        <div>
+          <h3 class="step-title">{{ s.title }}</h3>
+          <p>{{ s.body }}</p>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="tip section section-mist" aria-labelledby="tip-title">
+  <div class="container tip-grid">
+    <figure class="tip-media img-wrap clip-reveal">
+      <img src="/images/electric-file-closeup.jpg" alt="{{ h.tip.imgAlt }}" width="1600" height="1067" loading="lazy" style="object-position: 55% 60%">
+    </figure>
+    <div class="tip-card">
+      <p class="section-label">{{ h.tip.label }}</p>
+      <h2 class="section-title" id="tip-title">{{ h.tip.title }}</h2>
+      <p>{{ h.tip.body }}</p>
+      <ul class="check-list">
+        {% for p in h.tip.points %}<li>{{ p }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="system" id="system" data-gallery aria-labelledby="system-title">
+  <div class="system-pin">
+    <div class="container system-head">
+      <div>
+        <p class="section-label">{{ h.system.label }}</p>
+        <h2 class="section-title" id="system-title">{{ h.system.title }}</h2>
+      </div>
+      <div class="system-head-side">
+        <p>{{ h.system.intro }}</p>
+        <a class="text-link" href="{{ pages.products[lang] }}">{{ h.system.more }} {{ m.arrow() }}</a>
+      </div>
+    </div>
+    <div class="gallery-viewport">
+      <ul class="gallery-track" data-track>
+        {% for p in h.system.items %}
+        <li class="product-card">
+          <a href="{{ pages.products[lang] }}">
+            <figure class="product-img img-wrap"><img src="/images/{{ p.img }}" alt="{{ p.alt }}" width="900" height="900" loading="lazy"></figure>
+            <span class="product-idx">0{{ loop.index }}</span>
+            <h3 class="product-name">{{ p.name }}</h3>
+            <p class="product-meta">{{ p.meta }}</p>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="specs section section-lilac" aria-labelledby="specs-title">
+  <div class="container">
+    <div class="specs-head">
+      <p class="section-label">{{ h.specs.label }}</p>
+      <h2 class="section-title" id="specs-title">{{ h.specs.title }}</h2>
+    </div>
+    <dl class="spec-wall">
+      {% for s in h.specs.items %}
+      <div class="spec spec-{{ loop.index }}">
+        <dt class="spec-value"><span data-count="{{ s.value }}">{{ s.value }}</span><small>{{ s.unit }}</small></dt>
+        <dd>{{ s.label }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+  </div>
+</section>
+
+<section class="quote section" aria-label="Testimonial">
+  <div class="container quote-inner">
+    {{ m.toes() }}
+    <blockquote class="fade-up">
+      <p>“{{ h.quote.text }}”</p>
+      <footer><strong>{{ h.quote.name }}</strong><span>{{ h.quote.role }}</span></footer>
+    </blockquote>
+    <div class="reach fade-up">
+      <p class="section-label">{{ h.reach.label }}</p>
+      <p>{{ h.reach.body }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="paths section section-mist" aria-labelledby="paths-title">
+  <div class="container">
+    <p class="section-label">{{ h.paths.label }}</p>
+    <h2 class="section-title" id="paths-title">{{ h.paths.title }}</h2>
+    <div class="paths-grid">
+      <article class="path-card path-salon">
+        <figure class="img-wrap path-img"><img src="/images/salon-duo-laughing.jpg" alt="" width="1024" height="701" loading="lazy" style="object-position: 50% 30%"></figure>
+        <div class="path-body">
+          <h3>{{ h.paths.salon.title }}</h3>
+          <p>{{ h.paths.salon.body }}</p>
+          <a class="btn btn-primary magnetic" href="{{ pages.contact[lang] }}#pricing"><span>{{ h.paths.salon.cta }}</span>{{ m.arrow() }}</a>
+        </div>
+      </article>
+      <article class="path-card path-dist">
+        <figure class="img-wrap path-img"><img src="/images/discs-family.jpg" alt="" width="1024" height="683" loading="lazy"></figure>
+        <div class="path-body">
+          <h3>{{ h.paths.dist.title }}</h3>
+          <p>{{ h.paths.dist.body }}</p>
+          <a class="btn btn-outline magnetic" href="{{ pages.professionals[lang] }}#distributors"><span>{{ h.paths.dist.cta }}</span>{{ m.arrow() }}</a>
+        </div>
+      </article>
+    </div>
+    <p class="next-note">{{ m.disc("mini-disc") }}<span>{{ h.next }}</span></p>
+  </div>
+</section>
+
+{{ m.ctaBand(t, site, pages, lang, h.final.title, h.final.body) }}

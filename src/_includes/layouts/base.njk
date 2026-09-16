@@ -1,0 +1,101 @@
+{%- set t = copy[lang] -%}
+{%- set pc = t[copyKey] -%}
+{%- set canonical = (pages[pageKey][lang] if pages[pageKey] else page.url) | absUrl(site.url) -%}
+<!doctype html>
+<html lang="{{ 'es-MX' if lang == 'es' else 'en' }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ pc.title }}</title>
+<meta name="description" content="{{ pc.description or t.home.description }}">
+{%- if pageKey == '404' %}
+<meta name="robots" content="noindex">
+{%- else %}
+<link rel="canonical" href="{{ canonical }}">
+<link rel="alternate" hreflang="en" href="{{ pages[pageKey].en | absUrl(site.url) }}">
+<link rel="alternate" hreflang="es-MX" href="{{ pages[pageKey].es | absUrl(site.url) }}">
+<link rel="alternate" hreflang="es" href="{{ pages[pageKey].es | absUrl(site.url) }}">
+<link rel="alternate" hreflang="x-default" href="{{ pages[pageKey].en | absUrl(site.url) }}">
+{%- endif %}
+<meta name="theme-color" content="#27175F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fabeaulous Feet">
+<meta property="og:title" content="{{ pc.title }}">
+<meta property="og:description" content="{{ pc.description or t.home.description }}">
+<meta property="og:url" content="{{ canonical }}">
+<meta property="og:image" content="{{ '/images/og-fabeaulous-feet.jpg' | absUrl(site.url) }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="{{ 'es_MX' if lang == 'es' else 'en_US' }}">
+<meta property="og:locale:alternate" content="{{ 'en_US' if lang == 'es' else 'es_MX' }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Marcellus&display=swap" rel="stylesheet">
+{%- if heroImage %}
+<link rel="preload" as="image" href="{{ heroImage }}" fetchpriority="high">
+{%- endif %}
+<style>body{font-family:'Jost',system-ui,sans-serif;background:#FBF8FA;color:#111217}</style>
+<link rel="stylesheet" href="/css/style.css?v={{ site.cssVersion }}">
+<script>
+/* Motion gate: hidden start states only apply when .js is present. */
+(function(){var d=document.documentElement;var r=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r){d.classList.add('js');setTimeout(function(){if(!window.gsap){d.classList.remove('js')}},3000)}d.classList.add('has-js')})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#organization",
+      "name": "Fabeaulous Feet",
+      "alternateName": "Fabeaulous Feet Professional Pedicure System",
+      "url": "{{ site.url }}/",
+      "logo": "{{ site.url }}/favicon-512.png",
+      "image": "{{ site.url }}/images/og-fabeaulous-feet.jpg",
+      "email": "{{ site.email }}",
+      "description": "{{ t.home.description }}",
+      "founder": [
+        {"@type": "Person", "name": "William Gordon Johnson", "jobTitle": "Product development"},
+        {"@type": "Person", "name": "Karina Martinez", "jobTitle": "Business operations"}
+      ],
+      "address": {"@type": "PostalAddress", "addressLocality": "{{ site.locality }}", "addressRegion": "{{ site.region }}", "addressCountry": "{{ site.country }}"},
+      "areaServed": ["MX", "CA", "US"],
+      "knowsLanguage": ["en", "es"],
+      "sameAs": ["{{ site.instagram }}", "{{ site.facebook }}"],
+      "contactPoint": {"@type": "ContactPoint", "contactType": "sales", "email": "{{ site.email }}", "availableLanguage": ["English", "Spanish"]}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}/",
+      "name": "Fabeaulous Feet",
+      "inLanguage": ["en", "es-MX"],
+      "publisher": {"@id": "{{ site.url }}/#organization"}
+    }{% include "partials/schema.njk" %}
+  ]
+}
+</script>
+</head>
+<body class="page-{{ pageKey }}">
+<a class="skip-link" href="#main">{{ t.skip }}</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+{% include "partials/nav.njk" %}
+<main id="main">
+{{ content | safe }}
+</main>
+{% include "partials/footer.njk" %}
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="/js/main.js?v={{ site.jsVersion }}" defer></script>
+{%- if pageKey == 'home' %}
+<script src="/js/home.js?v={{ site.jsVersion }}" defer></script>
+{%- else %}
+<script src="/js/pages.js?v={{ site.jsVersion }}" defer></script>
+{%- endif %}
+</body>
+</html>

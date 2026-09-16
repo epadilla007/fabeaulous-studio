@@ -1,0 +1,93 @@
+{%- import "partials/macros.njk" as m -%}
+{%- set p = t.professionals -%}
+{{ m.pageHero(p.hero, "technician-magnivac.jpg", p.learn.imgAlt, "60% 40%") }}
+
+<section class="section" aria-labelledby="reasons-title">
+  <div class="container">
+    <p class="section-label">{{ p.reasons.label }}</p>
+    <h2 class="sr-only" id="reasons-title">{{ p.reasons.label }}</h2>
+    <div class="reason-grid stagger">
+      {% for r in p.reasons.items %}
+      <article class="reason-card">
+        <span class="reason-n">0{{ loop.index }}</span>
+        {{ m.disc("reason-disc") }}
+        <h3 class="item-name">{{ r.title }}</h3>
+        <p>{{ r.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-lilac quote-small" aria-label="Client comment">
+  <div class="container quote-inner">
+    {{ m.toes() }}
+    <blockquote class="fade-up">
+      <p>“{{ p.client.text }}”</p>
+      <footer><span>{{ p.client.who }}</span></footer>
+    </blockquote>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="learn-title">
+  <div class="container split">
+    <figure class="img-wrap split-media img-scale">
+      <img src="/images/hygiene-masked-technician.jpg" alt="{{ p.learn.imgAlt }}" width="1024" height="683" loading="lazy" style="object-position: 50% 35%">
+    </figure>
+    <div class="split-copy">
+      <p class="section-label">{{ p.learn.label }}</p>
+      <h2 class="section-title fade-up" id="learn-title">{{ p.learn.title }}</h2>
+      <p class="fade-up">{{ p.learn.body }}</p>
+      <a class="btn btn-primary magnetic" href="{{ pages.contact[lang] }}#pricing"><span>{{ t.cta.pricing }}</span>{{ m.arrow() }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist" aria-labelledby="ordering-title">
+  <div class="container">
+    <p class="section-label">{{ p.ordering.label }}</p>
+    <h2 class="section-title fade-up" id="ordering-title">{{ p.ordering.title }}</h2>
+    <div class="card-grid card-grid-4 stagger">
+      {% for o in p.ordering.items %}
+      <article class="info-card">
+        <h3 class="item-name">{{ o.title }}</h3>
+        <p>{{ o.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container faq-grid">
+    <div class="faq-head">
+      <p class="section-label">{{ p.faq.label }}</p>
+      <h2 class="section-title fade-up" id="faq-title">{{ p.faq.title }}</h2>
+      {{ m.disc("faq-disc") }}
+    </div>
+    <div class="faq-list">
+      {% for f in p.faq.items %}
+      <details class="faq-item"{% if loop.first %} open{% endif %}>
+        <summary><span>{{ f.q }}</span><i aria-hidden="true"></i></summary>
+        <div class="faq-a"><p>{{ f.a }}</p></div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy" id="distributors" aria-labelledby="dist-title">
+  <div class="container split split-rev">
+    <figure class="img-wrap split-media img-scale">
+      <img src="/images/discs-family.jpg" alt="{{ t.products.discs.name }}" width="1024" height="683" loading="lazy">
+    </figure>
+    <div class="split-copy">
+      <p class="section-label section-label-light">{{ p.dist.label }}</p>
+      <h2 class="section-title fade-up" id="dist-title">{{ p.dist.title }}</h2>
+      <p class="fade-up">{{ p.dist.body }}</p>
+      <a class="btn btn-light magnetic" href="{{ pages.contact[lang] }}#pricing"><span>{{ t.cta.distributor }}</span>{{ m.arrow() }}</a>
+    </div>
+  </div>
+</section>
+
+{{ m.ctaBand(t, site, pages, lang, t.home.final.title, t.home.final.body) }}

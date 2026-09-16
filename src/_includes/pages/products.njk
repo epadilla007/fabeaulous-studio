@@ -1,0 +1,173 @@
+{%- import "partials/macros.njk" as m -%}
+{%- set p = t.products -%}
+{%- set priceHref = pages.contact[lang] + '#pricing' -%}
+{{ m.pageHero(p.hero, "kit-purple.jpg", p.file.imgAlt, "center") }}
+
+<nav class="jump-nav" aria-label="{{ p.jump }}">
+  <div class="container jump-inner">
+    <span class="jump-label">{{ p.jump }}</span>
+    <a href="#{{ p.file.id }}">{{ p.file.name }}</a>
+    <a href="#{{ p.discs.id }}">{{ p.discs.name }}</a>
+    <a href="#{{ p.tips.id }}">{{ p.tips.name }}</a>
+    <a href="#{{ p.lamp.id }}">{{ p.lamp.name }}</a>
+    <a href="#{{ p.detail.id }}">{{ p.detail.name }}</a>
+    <a href="#{{ p.salon.id }}">{{ p.salon.name }}</a>
+  </div>
+</nav>
+
+<section class="section family" id="{{ p.file.id }}" aria-labelledby="file-title">
+  <div class="container family-grid">
+    <div class="family-copy">
+      <p class="section-label">{{ p.file.label }}</p>
+      <h2 class="section-title fade-up" id="file-title">{{ p.file.name }}</h2>
+      <p class="fade-up">{{ p.file.body }}</p>
+      <div class="two-lists">
+        <div class="fade-up">
+          <h3 class="mini-h">{{ p.specs }}</h3>
+          <ul class="check-list">{% for s in p.file.specs %}<li>{{ s }}</li>{% endfor %}</ul>
+        </div>
+        <div class="fade-up">
+          <h3 class="mini-h">{{ p.includes }}</h3>
+          <ul class="check-list">{% for s in p.file.box %}<li>{{ s }}</li>{% endfor %}</ul>
+        </div>
+      </div>
+      <a class="btn btn-primary magnetic" href="{{ priceHref }}"><span>{{ p.askPrice }}</span>{{ m.arrow() }}</a>
+    </div>
+    <div class="family-media">
+      <div class="color-picker" data-colors>
+        <figure class="color-stage img-wrap img-scale">
+          {% set files = ["file-purple.jpg","file-silver.jpg","file-black.jpg","file-chocolate.jpg","file-caramel.jpg"] %}
+          <img src="/images/file-purple.jpg" alt="{{ p.file.name }}: {{ p.file.colorNames[0] }}" width="900" height="900" loading="lazy" data-color-stage>
+        </figure>
+        <p class="mini-h">{{ p.colors }}</p>
+        <div class="swatches" role="group" aria-label="{{ p.colors }}">
+          {% set sw = ["#7E6BC4","#B9BCC2","#2B2C31","#5B3A2A","#D9B98A"] %}
+          {% for c in p.file.colorNames %}
+          <button type="button" class="swatch" style="--sw: {{ sw[loop.index0] }}" data-src="/images/{{ files[loop.index0] }}" data-alt="{{ p.file.name }}: {{ c }}" aria-pressed="{{ 'true' if loop.first else 'false' }}"><span class="swatch-dot" aria-hidden="true"></span>{{ c }}</button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist family" id="{{ p.discs.id }}" aria-labelledby="discs-title">
+  <div class="container">
+    <div class="family-head">
+      <div>
+        <p class="section-label">{{ p.discs.label }}</p>
+        <h2 class="section-title fade-up" id="discs-title">{{ p.discs.name }}</h2>
+      </div>
+      <p class="fade-up">{{ p.discs.body }}</p>
+    </div>
+    <div class="card-grid card-grid-3 stagger">
+      {% for d in p.discs.items %}
+      <article class="item-card">
+        <figure class="img-wrap item-img img-scale"><img src="/images/{{ d.img }}" alt="{{ d.alt }}" width="900" height="900" loading="lazy"></figure>
+        <p class="item-tag">{{ d.tag }}</p>
+        <h3 class="item-name">{{ d.name }}</h3>
+        <p>{{ d.body }}</p>
+        <p class="item-pack">{{ d.pack }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <p class="family-note fade-up">{{ p.discs.mx }} <a class="text-link" href="{{ priceHref }}">{{ p.askPrice }} {{ m.arrow() }}</a></p>
+  </div>
+</section>
+
+<section class="section family" id="{{ p.tips.id }}" aria-labelledby="tips-title">
+  <div class="container">
+    <div class="family-head">
+      <div>
+        <p class="section-label">{{ p.tips.label }}</p>
+        <h2 class="section-title fade-up" id="tips-title">{{ p.tips.name }}</h2>
+      </div>
+      <p class="fade-up">{{ p.tips.body }}</p>
+    </div>
+    <div class="card-grid card-grid-2 stagger">
+      {% for d in p.tips.items %}
+      <article class="item-card item-card-row">
+        <figure class="img-wrap item-img img-scale"><img src="/images/{{ d.img }}" alt="{{ d.alt }}" width="900" height="900" loading="lazy"></figure>
+        <div>
+          <h3 class="item-name">{{ d.name }}</h3>
+          <p>{{ d.body }}</p>
+          <a class="text-link" href="{{ priceHref }}">{{ p.askPrice }} {{ m.arrow() }}</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy family" id="{{ p.lamp.id }}" aria-labelledby="lamp-title">
+  <div class="container lamp-grid">
+    <figure class="img-wrap lamp-media img-scale">
+      <img src="/images/magnivac-in-use.jpg" alt="{{ p.lamp.imgAlt }}" width="1600" height="1067" loading="lazy" style="object-position: 40% 50%">
+    </figure>
+    <div class="lamp-copy">
+      <p class="section-label section-label-light">{{ p.lamp.label }}</p>
+      <h2 class="section-title fade-up" id="lamp-title">{{ p.lamp.name }}</h2>
+      <p class="fade-up">{{ p.lamp.body }}</p>
+      <ul class="check-list check-list-light fade-up">{% for s in p.lamp.specs %}<li>{{ s }}</li>{% endfor %}</ul>
+      <div class="lamp-foot">
+        <img class="lamp-product" src="/images/magnivac-lamp.jpg" alt="{{ p.lamp.productAlt }}" width="500" height="470" loading="lazy">
+        <a class="btn btn-light magnetic" href="{{ priceHref }}"><span>{{ p.askPrice }}</span>{{ m.arrow() }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section family" id="{{ p.detail.id }}" aria-labelledby="detail-title">
+  <div class="container">
+    <div class="family-head">
+      <div>
+        <p class="section-label">{{ p.detail.label }}</p>
+        <h2 class="section-title fade-up" id="detail-title">{{ p.detail.name }}</h2>
+      </div>
+    </div>
+    <div class="card-grid card-grid-4 stagger">
+      {% for d in p.detail.items %}
+      <article class="item-card">
+        <figure class="img-wrap item-img img-scale"><img src="/images/{{ d.img }}" alt="{{ d.alt }}" width="900" height="900" loading="lazy"></figure>
+        <h3 class="item-name">{{ d.name }}</h3>
+        <p>{{ d.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist family" id="{{ p.salon.id }}" aria-labelledby="salon-title">
+  <div class="container">
+    <div class="family-head">
+      <div>
+        <p class="section-label">{{ p.salon.label }}</p>
+        <h2 class="section-title fade-up" id="salon-title">{{ p.salon.name }}</h2>
+      </div>
+      <p class="fade-up">{{ p.salon.body }}</p>
+    </div>
+    <div class="card-grid card-grid-4 stagger">
+      {% for d in p.salon.items %}
+      <article class="item-card">
+        <figure class="img-wrap item-img img-scale"><img src="/images/{{ d.img }}" alt="{{ d.alt }}" width="500" height="470" loading="lazy"></figure>
+        <h3 class="item-name">{{ d.name }}</h3>
+        <p>{{ d.body }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section next-dev" aria-labelledby="next-title">
+  <div class="container next-grid">
+    {{ m.disc("next-disc") }}
+    <div>
+      <p class="section-label">{{ p.next.label }}</p>
+      <h2 class="section-title fade-up" id="next-title">{{ p.next.title }}</h2>
+      <p class="fade-up">{{ p.next.body }}</p>
+      <a class="btn btn-outline magnetic" href="{{ priceHref }}"><span>{{ p.next.cta }}</span>{{ m.arrow() }}</a>
+    </div>
+  </div>
+</section>
+
+{{ m.ctaBand(t, site, pages, lang, t.home.final.title, t.home.final.body) }}

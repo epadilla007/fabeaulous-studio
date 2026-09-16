@@ -1,0 +1,10 @@
+---
+layout: layouts/base.njk
+lang: en
+pageKey: "404"
+copyKey: notFound
+permalink: /404.html
+eleventyExcludeFromCollections: true
+---
+{%- set t = copy[lang] -%}
+{% include "pages/notfound.njk" %}

@@ -1,0 +1,42 @@
+{%- set other = 'es' if lang == 'en' else 'en' -%}
+{%- set wa = 'https://wa.me/' + site.whatsapp + '?text=' + (t.cta.waText | urlencode) -%}
+<footer class="site-footer">
+  <svg class="footer-ring" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="190"/><circle cx="200" cy="200" r="140"/><circle cx="200" cy="200" r="90"/></svg>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="/images/brand/logo-white.svg" alt="Fabeaulous Feet" width="220" height="71" loading="lazy">
+      <p>{{ t.footer.blurb }}</p>
+      <p class="footer-small">{{ t.footer.pros }}</p>
+    </div>
+    <div>
+      <h2 class="footer-h">{{ t.footer.explore }}</h2>
+      <ul class="footer-links">
+        <li><a href="{{ pages.products[lang] }}">{{ t.nav.products }}</a></li>
+        <li><a href="{{ pages.professionals[lang] }}">{{ t.nav.professionals }}</a></li>
+        <li><a href="{{ pages.about[lang] }}">{{ t.nav.about }}</a></li>
+        <li><a href="{{ pages.contact[lang] }}">{{ t.nav.contact }}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">{{ t.footer.talk }}</h2>
+      <ul class="footer-links">
+        {# PLACEHOLDER: WHATSAPP_NUMBER #}
+        <li><a href="{{ wa }}" target="_blank" rel="noopener" data-whatsapp>WhatsApp</a></li>
+        <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        <li><span class="footer-muted">{{ site.locality }}, {{ site.region }}, {{ 'México' if lang == 'es' else 'Mexico' }}</span></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="footer-h">{{ t.footer.follow }}</h2>
+      <ul class="footer-links">
+        <li><a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="{{ pages[pageKey][other] if pages[pageKey] else ('/es/' if other == 'es' else '/') }}" hreflang="{{ other }}" lang="{{ other }}">{{ t.footer.langSwitch }}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span data-year>2026</span> Fabeaulous Feet. {{ t.footer.rights }}</p>
+    <p class="footer-muted">Professional Pedicure System · Sistema Profesional de Pedicure</p>
+  </div>
+</footer>

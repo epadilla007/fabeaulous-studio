@@ -1,0 +1,74 @@
+{%- import "partials/macros.njk" as m -%}
+{%- set p = t.about -%}
+{{ m.pageHero(p.hero, "client-and-technician.jpg", p.story.imgAlt, "50% 30%") }}
+
+<section class="section" aria-labelledby="story-title">
+  <div class="container split">
+    <div class="split-copy">
+      <p class="section-label">{{ p.story.label }}</p>
+      <h2 class="section-title fade-up" id="story-title">{{ p.story.title }}</h2>
+      <p class="fade-up">{{ p.story.p1 }}</p>
+      <p class="fade-up">{{ p.story.p2 }}</p>
+    </div>
+    <figure class="img-wrap split-media img-scale">
+      <img src="/images/caramel-file-in-use.jpg" alt="{{ t.home.tip.imgAlt }}" width="1024" height="683" loading="lazy" style="object-position: 50% 50%">
+    </figure>
+  </div>
+</section>
+
+<section class="section section-mist" aria-labelledby="people-title">
+  <div class="container">
+    <p class="section-label">{{ p.people.label }}</p>
+    <h2 class="section-title fade-up" id="people-title">{{ p.people.title }}</h2>
+    <div class="card-grid card-grid-2 stagger">
+      {% for person in p.people.items %}
+      <article class="person-card">
+        <div class="monogram" aria-hidden="true">{{ m.disc("monogram-disc") }}<span>{{ person.initials }}</span></div>
+        <div>
+          <h3 class="person-name">{{ person.name }}</h3>
+          <p class="item-tag">{{ person.role }}</p>
+          <p>{{ person.body }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="brand-title">
+  <div class="container brand-grid">
+    <div class="brand-mark">
+      <img src="/images/brand/icon-plum.svg" alt="Fabeaulous Feet icon" width="220" height="211" loading="lazy">
+    </div>
+    <div>
+      <p class="section-label">{{ p.brand.label }}</p>
+      <h2 class="section-title fade-up" id="brand-title">{{ p.brand.title }}</h2>
+      <p class="fade-up">{{ p.brand.body }}</p>
+      <ul class="palette" aria-label="Brand colors">
+        <li style="--c:#681C67"><span>Deep Plum</span></li>
+        <li style="--c:#27175F"><span>Violet Navy</span></li>
+        <li style="--c:#F8C8EF" class="light"><span>Blush Lilac</span></li>
+        <li style="--c:#F81E6C"><span>Electric Raspberry</span></li>
+        <li style="--c:#111217"><span>Charcoal</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-navy" aria-labelledby="shows-title">
+  <div class="container shows-grid">
+    <div>
+      <p class="section-label section-label-light">{{ p.shows.label }}</p>
+      <h2 class="section-title fade-up" id="shows-title">{{ p.shows.title }}</h2>
+      <p class="fade-up">{{ p.shows.body }}</p>
+    </div>
+    <div>
+      <ul class="show-list stagger">
+        {% for s in p.shows.items %}<li>{{ m.disc("show-disc") }}<span>{{ s }}</span></li>{% endfor %}
+      </ul>
+      <p class="fade-up show-note">{{ p.shows.note }}</p>
+    </div>
+  </div>
+</section>
+
+{{ m.ctaBand(t, site, pages, lang, t.home.final.title, t.home.final.body) }}

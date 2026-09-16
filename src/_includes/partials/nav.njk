@@ -1,0 +1,44 @@
+{%- set other = 'es' if lang == 'en' else 'en' -%}
+{%- set langHref = pages[pageKey][other] if pages[pageKey] else ('/es/' if other == 'es' else '/') -%}
+{%- set wa = 'https://wa.me/' + site.whatsapp + '?text=' + (t.cta.waText | urlencode) -%}
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="{{ pages.home[lang] }}" aria-label="{{ t.nav.home }}">
+      <img src="/images/brand/logo-plum.svg" alt="Fabeaulous Feet, Professional Pedicure System" width="188" height="60">
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="{{ pages.products[lang] }}" data-key="products">{{ t.nav.products }}</a></li>
+        <li><a href="{{ pages.professionals[lang] }}" data-key="professionals">{{ t.nav.professionals }}</a></li>
+        <li><a href="{{ pages.about[lang] }}" data-key="about">{{ t.nav.about }}</a></li>
+        <li><a href="{{ pages.contact[lang] }}" data-key="contact">{{ t.nav.contact }}</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <a href="{{ pages[pageKey].en if pages[pageKey] else '/' }}" hreflang="en" lang="en" {% if lang == 'en' %}aria-current="true"{% endif %}>EN</a>
+        <a href="{{ pages[pageKey].es if pages[pageKey] else '/es/' }}" hreflang="es" lang="es" {% if lang == 'es' %}aria-current="true"{% endif %}>ES</a>
+      </div>
+      <a class="btn btn-primary btn-sm header-cta" href="{{ pages.contact[lang] }}#pricing"><span>{{ t.nav.cta }}</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="menu-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+        <span class="sr-only" data-label-open="{{ t.nav.menu }}" data-label-close="{{ t.nav.close }}">{{ t.nav.menu }}</span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <ul>
+      <li><a href="{{ pages.home[lang] }}">{{ 'Inicio' if lang == 'es' else 'Home' }}</a></li>
+      <li><a href="{{ pages.products[lang] }}">{{ t.nav.products }}</a></li>
+      <li><a href="{{ pages.professionals[lang] }}">{{ t.nav.professionals }}</a></li>
+      <li><a href="{{ pages.about[lang] }}">{{ t.nav.about }}</a></li>
+      <li><a href="{{ pages.contact[lang] }}">{{ t.nav.contact }}</a></li>
+    </ul>
+    <div class="mobile-menu-actions">
+      <a class="btn btn-primary" href="{{ pages.contact[lang] }}#pricing"><span>{{ t.cta.pricing }}</span></a>
+      {# PLACEHOLDER: WhatsApp link uses site.whatsapp (WHATSAPP_NUMBER) until the number is confirmed #}
+      <a class="btn btn-whatsapp" href="{{ wa }}" target="_blank" rel="noopener" data-whatsapp><span>{{ t.cta.whatsapp }}</span></a>
+      <a class="mobile-lang" href="{{ langHref }}" hreflang="{{ other }}" lang="{{ other }}">{{ t.footer.langSwitch }}</a>
+    </div>
+  </div>
+</header>
